@@ -1,6 +1,7 @@
 # .bashrc
 source /usr/local/share/blesh/ble.sh
 # Source global definitions
+ble-face -s auto_complete fg=244,bg=default
 if [ -f /etc/bashrc ]; then
     . /etc/bashrc
 fi
