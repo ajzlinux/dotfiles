@@ -16,11 +16,17 @@ sudo dnf install -y \
     curl \
     git \
     make \
-    gcc
+    gcc \
+    starship \
+    fzf \
+    bat \
+    lsd
 
 echo "== Copiando archivos de configuracion =="
 cp "$(dirname "$0")/.vimrc" ~/.vimrc
 cp "$(dirname "$0")/.bashrc" ~/.bashrc
+mkdir -p ~/.config
+cp "$(dirname "$0")/starship.toml" ~/.config/starship.toml
 mkdir -p ~/.config/kitty
 cp "$(dirname "$0")/kitty.conf" ~/.config/kitty/kitty.conf
 

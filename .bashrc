@@ -2,6 +2,8 @@
 source /usr/local/share/blesh/ble.sh
 # Source global definitions
 ble-face -s auto_complete fg=244,bg=default
+ble-import -d integration/fzf-completion
+ble-import -d integration/fzf-key-bindings
 if [ -f /etc/bashrc ]; then
     . /etc/bashrc
 fi
@@ -28,14 +30,16 @@ unset rc
 eval "$(starship init bash)"
 
 # Alias para lsd
-alias ls='lsd'
+alias ls='lsd --group-directories-first'
 alias l='lsd -l'
 alias la='lsd -a'
 alias lla='lsd -la'
 alias lt='lsd --tree'
+alias lst='lsd -la -t'
 alias lt2='lsd --tree --depth 2'
+alias lt3='lsd --tree --depth 3'
 alias ll='lsd -l --header'          # con encabezados de columna
-alias lsize='lsd -la --total-size'  # muestra tamaño total de directorios
+alias lsize='lsd -la --total-size -S'  # muestra tamaño total de directorios
 alias cat='bat'
 
 [[ ${BLE_VERSION-} ]] && ble-attach
