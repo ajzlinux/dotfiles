@@ -14,10 +14,13 @@ sudo dnf install -y \
     clang-tools-extra \
     ctags \
     curl \
-    git
+    git \
+    make \
+    gcc
 
 echo "== Copiando archivos de configuracion =="
 cp "$(dirname "$0")/.vimrc" ~/.vimrc
+cp "$(dirname "$0")/.bashrc" ~/.bashrc
 mkdir -p ~/.config/kitty
 cp "$(dirname "$0")/kitty.conf" ~/.config/kitty/kitty.conf
 
@@ -31,6 +34,17 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 
 echo "== Instalando plugins de Vim =="
 vim +PlugInstall +qall
+
+echo "== Instalando ble.sh (autosugerencias en bash) =="
+if [ ! -d ~/ble.sh-src ]; then
+    git clone --recursive --depth 1 --shallow-submodules \
+        https://github.com/akinomyoga/ble.sh.git ~/ble.sh-src
+    cd ~/ble.sh-src
+    make
+    sudo make install PREFIX=/usr/local
+    cd -
+    rm -rf ~/ble.sh-src
+fi
 
 echo ""
 echo "Listo. Entorno restaurado."
